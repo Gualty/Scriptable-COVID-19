@@ -5,8 +5,8 @@ Scripts per Scriptable per visualizzare in tempo reale informazioni sul COVID-19
 
 ## Scripts disponibili
 
-### Info contagi per regione
-### Vaccinazioni per regione
+### [Info contagi per regione](https://github.com/Gualty/Scriptable-COVID-19-Italia/blob/main/COVID-19_info_regione.js)
+### [Vaccinazioni per regione](https://github.com/Gualty/Scriptable-COVID-19-Italia/blob/main/vaccinazioni_covid-19_regioni.js)
 
 ## Come utilizzarli?
 
