@@ -1,4 +1,4 @@
-// VACCINAZIONI ITALIA PER REGIONE v.1.0
+// VACCINAZIONI ITALIA PER REGIONE v.1.1
 // Developer by Gualty@GitHub https://github.com/Gualty
 // Questo script estrapola i dati forniti dal Governo e mostra quelli della regione scelta
 // Fonte: https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/vaccini-summary-latest.json
@@ -34,6 +34,8 @@
 // 20 = VENETO
 
 const sceltaRegione = "0" // Numero regione di default
+let width = 100;
+const h = 3;
 
 if (!args.widgetParameter) {
   arg_regione = sceltaRegione
@@ -71,7 +73,7 @@ async function createWidget(api) {
 
   const upperTextStack = upperStack.addStack();
   upperTextStack.layoutVertically();
-
+ 
   let staticText_titolo = upperTextStack.addText("Vaccinazioni");
   staticText_titolo.font = Font.boldRoundedSystemFont(13);
   staticText_titolo.textColor = Color.white()
@@ -91,27 +93,53 @@ async function createWidget(api) {
   let titleDS = widget.addText("Dosi Somministrate")
   titleDS.textColor = Color.white()
   titleDS.font = Font.boldSystemFont(11)
-  widget.addSpacer(2)
+  //widget.addSpacer(2)
   let dosiSomministrate = widget.addText(valore.dosiSom)
   dosiSomministrate.textColor = Color.green()
-  dosiSomministrate.font = Font.boldSystemFont(17)
-  widget.addSpacer(2)
+  dosiSomministrate.font = Font.boldSystemFont(13)
+  //widget.addSpacer(2)
   let titleDC = widget.addText("Dosi Consegnate")
   titleDC.textColor = Color.white()
   titleDC.font = Font.boldSystemFont(11)
-  widget.addSpacer(2)
+  //widget.addSpacer(2)
   let dosiConsegnate = widget.addText(valore.dosiCons)
   dosiConsegnate.textColor = Color.red()
-  dosiConsegnate.font = Font.boldSystemFont(17)
-  widget.addSpacer(4)
-  let titlePS = widget.addText("% Somministrate")
-  titlePS.textColor = Color.white()
-  titlePS.font = Font.boldSystemFont(11)
-  widget.addSpacer(1)
-  let percSomministrate = widget.addText(valore.percSom + "%")
-  percSomministrate.textColor = Color.yellow()
-  percSomministrate.font = Font.boldSystemFont(17)
+  dosiConsegnate.font = Font.boldSystemFont(13)
 
+  widget.addSpacer(2)
+  let titlePS = widget.addText(valore.percSom + "% Dosi Somm.")
+  titlePS.textColor = Color.yellow()
+  titlePS.font = Font.boldSystemFont(11)
+  widget.addSpacer(2)
+  
+  if (valore.percSom.toLocaleString() < 30) {
+    var colore_barra = new Color("#f60000");
+  } else if (valore.percSom.toLocaleString() < 50) {
+    var colore_barra = new Color("#dd0000");
+  } else if (valore.percSom.toLocaleString() < 85) {
+    var colore_barra = new Color("#fa6607");
+  } else {
+    var colore_barra = new Color("#40b000");
+  }
+  
+  let progressStack = widget.addStack();
+  progressStack.layoutVertically();
+  let progressNumberStack = widget.addStack();
+  progressNumberStack.layoutHorizontally();
+  const progressText0 = progressNumberStack.addText("0%");
+  progressText0.font = Font.mediumSystemFont(8);
+  progressText0.textColor = Color.white();
+  progressNumberStack.addSpacer();
+  const progressText100 = progressNumberStack.addText("100%");
+  progressText100.font = Font.mediumSystemFont(8); 
+  progressText100.textColor = Color.white();
+  progressStack.addImage(createProgress(valore.percSom, colore_barra));
+  widget.addSpacer(1)
+  /*let ultimoAggiornamento = widget.addText("Agg. " + valore.dataAgg);
+  ultimoAggiornamento.textColor = Color.white();
+  ultimoAggiornamento.font = Font.mediumMonospacedSystemFont(5);
+  ultimoAggiornamento.textOpacity = 0.7;
+  ultimoAggiornamento.centerAlignText();*/
   
   return widget
 }
@@ -130,11 +158,15 @@ async function vacciniPerRegione(result) {
       let dosiSomm = formatNumber(currentItem[1][indexRe]["dosi_somministrate"])
       let dosiConse = formatNumber(currentItem[1][indexRe]["dosi_consegnate"])
       let percSomm = currentItem[1][indexRe]["percentuale_somministrazione"].toString()
+      let dataAggiornamento = new Date(currentItem[1][indexRe]["ultimo_aggiornamento"]).toLocaleString() 
+      //dataAggiornamento Non ancora inserita per motivi di spazio nel widget
+
       return {
         nomeRe: nomeReg,
         dosiSom: dosiSomm,
         dosiCons: dosiConse,
-        percSom: percSomm
+        percSom: percSomm,
+        dataAgg: dataAggiornamento
       }
     }
   }
@@ -154,3 +186,25 @@ async function loadAppIcon() {
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 }
+
+function createProgress(percSomm, color_barra) {
+    const context = new DrawContext();
+    context.size = new Size(width, h);
+    context.opaque = false;
+    context.respectScreenScale = true;
+    context.setFillColor(new Color("#d2d2d7"));
+    const path = new Path();
+    path.addRoundedRect(new Rect(0, 0, width, h), 3, 2);
+    context.addPath(path);
+    context.fillPath();
+    context.setFillColor(color_barra);
+    const path1 = new Path();
+    const path1width = 
+      Number(percSomm) > width
+      ? width
+      : Number(percSomm);
+    path1.addRoundedRect(new Rect(0, 0, path1width, h), 3, 2);
+    context.addPath(path1);
+    context.fillPath();
+    return context.getImage();
+  }
