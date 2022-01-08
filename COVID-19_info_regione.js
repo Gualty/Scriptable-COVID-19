@@ -8,7 +8,7 @@
 // marco79cgn@Github (https://gist.github.com/marco79cgn/b5f291d6242a2c530e56c748f1ae7f2c)
 
 // SELEZIONA REGIONE
-// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di defaultRegione.
+// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di sceltaRegione.
 
 // REGIONI
 //  0 = ABRUZZO
@@ -75,7 +75,7 @@ async function createWidget(api) {
   let staticText_titolo = upperTextStack.addText("COVID-19");
   staticText_titolo.font = Font.boldRoundedSystemFont(13);
   staticText_titolo.textColor = Color.white()
-  
+
   widget.addSpacer(1);
 
   let staticText_italia = upperTextStack.addText(valore.nomeRe);
@@ -87,7 +87,7 @@ async function createWidget(api) {
   logoImage.imageSize = new Size(30, 30);
 
   widget.addSpacer(2);
-  
+
   let titleDS = widget.addText("Nuovi Positivi")
   titleDS.textColor = Color.white()
   titleDS.font = Font.boldSystemFont(11)
@@ -134,7 +134,7 @@ async function contagiPerRegione(result) {
         dataAgg: dataAggiornamento
       }
     }
- 
+
 
 async function loadDocs() {
   let url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni-latest.json"
