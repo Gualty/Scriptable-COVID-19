@@ -1,49 +1,48 @@
-// INFO COVID-19 WORLD v.1.0
+// INFO COVID-19 WORLD v.1.1
 // Developer by Gualty@GitHub https://github.com/Gualty
 // Questo script estrapola i dati forniti da https://coronavirus-19-api.herokuapp.com/ e mostra la nazione scelta
-// Fonte: https://coronavirus-19-api.herokuapp.com/countries/https://coronavirus-19-api.herokuapp.com/countries/
+// Fonte: https://coronavirus-19-api.herokuapp.com/countries/
 
 // From an idea of sebasanblas@Github https://gist.github.com/sebasanblas/d3638867a99c4d84942c159b88bb4096 and
 // marco79cgn@Github (https://gist.github.com/marco79cgn/b5f291d6242a2c530e56c748f1ae7f2c)
 
 // SELEZIONA NAZIONE
-// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di defaultRegione.
+// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di sceltaNazione.
 
 // REGIONI
 //  0 = World
 //  1 = USA
-//  2 = Brazil
-//  3 = India
-//  4 = France
-//  5 = Russia
-//  6 = UK
-//  7 = Italy
-//  8 = Turkey
+//  2 = India
+//  3 = Brazil
+//  4 = UK
+//  5 = France
+//  6 = Russia
+//  7 = Turkey
+//  8 = Germany
 //  9 = Spain
-// 10 = Germany
-// 11 = Poland
-// 12 = Colombia
-// 13 = Argentina
-// 14 = Mexico
-// 15 = Iran
-// 16 = Ukraine
-// 17 = Peru
-// 18 = Czechia
-// 19 = South Africa
-// 20 = Indonesia
-// 21 = Netherlands
-// 22 = Chile
+// 10 = Italy
+// 11 = Iran
+// 12 = Argentina
+// 13 = Colombia
+// 14 = Indonesia
+// 15 = Poland
+// 16 = Mexico
+// 17 = Ukraine
+// 18 = South Africa
+// 19 = Netherlands
+// 20 = Philippines
+// 21 = Malaysia
+// 22 = Czechia
 // 23 = Canada
-// 24 = Romania
-// 25 = Belgium
-// 26 = Iraq
-// 27 = Israel
-// 28 = Portugual
-// 28 = Sweden
-// 29 = Philippines
-// 30 = Pakistan
-// Per visualizzare tutte le nazioni visita https://coronavirus-19-api.herokuapp.com/countries/ e calcola il numero della 
-// nazione in base alla posizione partendo dal numero 0 che corrisponde a WORLD, 1 USA, 7 Italy.
+// 24 = Peru
+// 25 = Thailand
+// 26 = Belgium
+// 27 = Iraq
+// 28 = Vietnam
+// 29 = Romania
+// 30 = Chile
+// Per visualizzare tutte le nazioni visita https://coronavirus-19-api.herokuapp.com/countries/ e calcola il numero della
+// nazione in base alla posizione partendo dal numero 0 che corrisponde a WORLD, 1 USA, 10 Italy.
 
 const sceltaNazione = "0" // Numero Nazione di default - 0 = WORLD
 
@@ -87,7 +86,7 @@ async function createWidget(api) {
   let staticText_titolo = upperTextStack.addText("COVID-19");
   staticText_titolo.font = Font.boldRoundedSystemFont(13);
   staticText_titolo.textColor = Color.white()
-  
+
   widget.addSpacer(1);
 
   let staticText_italia = upperTextStack.addText(valore.nomeNaz);
@@ -99,7 +98,7 @@ async function createWidget(api) {
   logoImage.imageSize = new Size(30, 30);
 
   widget.addSpacer(2);
-  
+
   let titleDS = widget.addText("Totale Casi")
   titleDS.textColor = Color.white()
   titleDS.font = Font.boldSystemFont(11)
@@ -130,7 +129,7 @@ async function createWidget(api) {
 async function infoCOVID() {
   let docs = await loadDocs()
   var result = Object.values(docs)
-  
+
   return result
 }
 
@@ -147,7 +146,7 @@ async function contagiPerNazione(result) {
 
       }
     }
- 
+
 
 async function loadDocs() {
   let url = "https://coronavirus-19-api.herokuapp.com/countries/"
