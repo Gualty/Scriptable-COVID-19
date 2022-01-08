@@ -1,11 +1,12 @@
-# Scriptable COVID-19 Italia 🇮🇹
-Scripts per Scriptable per visualizzare in tempo reale informazioni sul COVID-19 nella tua regione italiana
+# Scriptable COVID-19 Italia 🇮🇹 e Mondo 🌍
+Scripts per Scriptable per visualizzare in tempo reale informazioni sul COVID-19 nella tua regione italiana o nel Mondo
 
-<p align="center"><img src="screenshot.PNG" alt="screenshot" width="auto" height="700"></p>
+<p align="center"><img src="screenshot.PNG" alt="screenshot" width="auto" height="700"><img src="screenshot_big.PNG" alt="screenshot" width="auto" height="700"></p>
 
 ## Scripts disponibili
 
 ### [Info contagi per regione](https://github.com/Gualty/Scriptable-COVID-19-Italia/blob/main/COVID-19_info_regione.js)
+### [Info contagi per regione (Widget grande)](https://github.com/Gualty/Scriptable-COVID-19/blob/main/COVID-19_info_regione_big.js)
 ### [Info contagi per Nazione](https://github.com/Gualty/Scriptable-COVID-19-Italia/blob/main/COVID-19_World_info.js)
 ### [Vaccinazioni per regione](https://github.com/Gualty/Scriptable-COVID-19-Italia/blob/main/vaccinazioni_covid-19_regioni.js)
 
