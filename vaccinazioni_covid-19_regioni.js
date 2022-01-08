@@ -8,7 +8,7 @@
 // marco79cgn@Github (https://gist.github.com/marco79cgn/b5f291d6242a2c530e56c748f1ae7f2c)
 
 // SELEZIONA REGIONE
-// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di defaultRegione.
+// Puoi scegliere la regione impostando i parametri da passare allo script oppure modificando il valore qui sotto di sceltaRegione.
 
 // REGIONI
 //  0 = ABRUZZO
@@ -73,11 +73,11 @@ async function createWidget(api) {
 
   const upperTextStack = upperStack.addStack();
   upperTextStack.layoutVertically();
- 
+
   let staticText_titolo = upperTextStack.addText("Vaccinazioni");
   staticText_titolo.font = Font.boldRoundedSystemFont(13);
   staticText_titolo.textColor = Color.white()
-  
+
   widget.addSpacer(1);
 
   let staticText_italia = upperTextStack.addText(valore.nomeRe);
@@ -89,7 +89,7 @@ async function createWidget(api) {
   logoImage.imageSize = new Size(30, 30);
 
   widget.addSpacer(2);
-  
+
   let titleDS = widget.addText("Dosi Somministrate")
   titleDS.textColor = Color.white()
   titleDS.font = Font.boldSystemFont(11)
@@ -111,7 +111,7 @@ async function createWidget(api) {
   titlePS.textColor = Color.yellow()
   titlePS.font = Font.boldSystemFont(11)
   widget.addSpacer(2)
-  
+
   if (valore.percSom.toLocaleString() < 30) {
     var colore_barra = new Color("#f60000");
   } else if (valore.percSom.toLocaleString() < 50) {
@@ -121,7 +121,7 @@ async function createWidget(api) {
   } else {
     var colore_barra = new Color("#40b000");
   }
-  
+
   let progressStack = widget.addStack();
   progressStack.layoutVertically();
   let progressNumberStack = widget.addStack();
@@ -131,7 +131,7 @@ async function createWidget(api) {
   progressText0.textColor = Color.white();
   progressNumberStack.addSpacer();
   const progressText100 = progressNumberStack.addText("100%");
-  progressText100.font = Font.mediumSystemFont(8); 
+  progressText100.font = Font.mediumSystemFont(8);
   progressText100.textColor = Color.white();
   progressStack.addImage(createProgress(valore.percSom, colore_barra));
   widget.addSpacer(1)
@@ -140,7 +140,7 @@ async function createWidget(api) {
   ultimoAggiornamento.font = Font.mediumMonospacedSystemFont(5);
   ultimoAggiornamento.textOpacity = 0.7;
   ultimoAggiornamento.centerAlignText();*/
-  
+
   return widget
 }
 
@@ -158,7 +158,7 @@ async function vacciniPerRegione(result) {
       let dosiSomm = formatNumber(currentItem[1][indexRe]["dosi_somministrate"])
       let dosiConse = formatNumber(currentItem[1][indexRe]["dosi_consegnate"])
       let percSomm = currentItem[1][indexRe]["percentuale_somministrazione"].toString()
-      let dataAggiornamento = new Date(currentItem[1][indexRe]["ultimo_aggiornamento"]).toLocaleString() 
+      let dataAggiornamento = new Date(currentItem[1][indexRe]["ultimo_aggiornamento"]).toLocaleString()
       //dataAggiornamento Non ancora inserita per motivi di spazio nel widget
 
       return {
@@ -199,7 +199,7 @@ function createProgress(percSomm, color_barra) {
     context.fillPath();
     context.setFillColor(color_barra);
     const path1 = new Path();
-    const path1width = 
+    const path1width =
       Number(percSomm) > width
       ? width
       : Number(percSomm);
