@@ -48,7 +48,7 @@ let widget = await createWidget(infoV)
 if (config.runsInWidget) {
   Script.setWidget(widget)
 } else {
-  widget.presentSmall()
+  widget.presentLarge()
 }
 // Calling Script.complete() signals to Scriptable that the script have finished running.
 // This can speed up the execution, in particular when running the script from Shortcuts or using Siri.
