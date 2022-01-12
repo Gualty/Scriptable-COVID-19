@@ -62,6 +62,9 @@ Scripts per Scriptable per visualizzare in tempo reale informazioni sul COVID-19
 
 20 = VENETO
 
+## Fonte dei dati
+I dati sono estrapolati da [Dati COVID-19 Italia](https://github.com/pcm-dpc/COVID-19) forniti da [
+Presidenza del Consiglio dei Ministri - Dipartimento della Protezione Civile](https://github.com/pcm-dpc)
 
 ## Crediti
 Per la creazione di questi script ho preso spunto da [sebasanblas](https://gist.github.com/sebasanblas/d3638867a99c4d84942c159b88bb4096) e [marco79cgn](https://gist.github.com/marco79cgn/b5f291d6242a2c530e56c748f1ae7f2c), i quali hanno creato scripts per le vaccinazioni in Argentina 🇦🇷 e Germania 🇩🇪.
